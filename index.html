@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pet shop</title>
+        <link rel="icon" href="./images/logo.webp" type="image/webp">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+                integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="./style-files/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+        <div class="lato w-11/12 2xl:max-w-[1536px] mx-auto reletave">
+
+
+                <!-- Header section start here  -->
+                <header>
+                        <!-- Navbar section for mobile device start here  -->
+                        <div id="mobile-nav">
+                                <nav class=" py-8 flex justify-between items-center">
+                                        <div class=" md:ml-0">
+                                                <a onclick="loadAllPats()"
+                                                        class="flex text-[2rem] items-center px-1 w-24 font-bold gap-2"
+                                                        href="">
+                                                        <img class="h-[2rem]" src="./images/logo.webp" alt="">Paddy</a>
+                                        </div>
+
+                                        <div class="dropdown dropdown-end">
+                                                <div tabindex="0" role="button" class="btn m-1"><i
+                                                                class="fa-solid fa-bars"></i>
+                                                </div>
+                                                <ul tabindex="0"
+                                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-24 p-2 shadow">
+                                                        <li><a>Home</a></li>
+                                                        <li><a>Shope</a></li>
+                                                        <li><a>Contact</a></li>
+
+                                                </ul>
+                                        </div>
+                                </nav>
+                        </div>
+
+                        <!-- Navbar section for large device start here  -->
+                        <div id="large-display-nav">
+                                <nav class="py-8 flex flex-col space-y-4 md:flex-row justify-between items-center">
+                                        <div class="-ml-16 md:ml-0">
+                                                <a onclick="loadAllPats()"
+                                                        class="flex text-[2rem] items-center px-1 w-24 font-bold gap-2"
+                                                        href="">
+                                                        <img class="h-[2rem]" src="./images/logo.webp" alt="">Paddy</a>
+                                        </div>
+                                        <div class="flex gap-8 md:mr-16">
+                                                <button onclick="loadAllPats()" class="text-xl">
+                                                        Home
+                                                </button>
+                                                <button class="text-xl">
+                                                        Shope
+                                                </button>
+                                                <button class="text-xl">
+                                                        Contact
+                                                </button>
+                                        </div>
+                                        <div
+                                                class="w-10 h-10 border flex justify-center items-center solid border-gray-300 rounded-full">
+                                                <i class="fa-regular fa-user"></i>
+                                        </div>
+                                </nav>
+                        </div>
+                        <!-- Banner section start here  -->
+                        <div class=" md:max-w-[54rem] mx-auto flex flex-col items-center space-y-6 p-12 text-center ">
+                                <p class="text-xl font-semibold text-gray-400">Bringing Families Together ❤️‍🔥
+                                </p>
+                                <h1 class="text-5xl lg:text-7xl font-bold text-[#131313]">Your Path to Adoption <br>
+                                        Starts
+                                        Here</h1>
+                                <p class="text-sm text-gray-700">The advantages of adopting a pet are numerous. Pets
+                                        provide
+                                        unconditional
+                                        affection and company, which reduces loneliness and enhances mental well-being.
+                                        Adopting
+                                        an animal reduces the number of animals in shelters by giving a homeless animal
+                                        a second
+                                        chance at life.</p>
+                                <a href="#pet-best-friend"> <button
+                                                class="py-2 px-6 bg-[#0E7A81] text-base text-white font-medium rounded-lg">View
+                                                More</button></a>
+
+                                <img src="./images/banner.png" alt="">
+                        </div>
+
+                </header>
+                <main class=" py-12 ">
+                        <!-- Adopt Your Best Friend section  -->
+                        <div id="pet-best-friend" class=" py-10 max-w-[36rem] text-center mx-auto space-y-6">
+                                <h1 class="text-5xl text-[#131313] font-bold">Adopt Your Best Friend</h1>
+                                <p class="text-[#131313B3]">Adopting a pet not only saves lives, but it also offers
+                                        companionship and improves health by
+                                        lowering
+                                        stress levels and fostering happiness and physical activity.</p>
+                        </div>
+
+                        <!-- Category Button section  -->
+                        <div id="category-btn-container" class="py-10 gap-8 grid grid-cols-2 lg:grid-cols-4">
+
+                        </div>
+                        <!-- Pets showing section  -->
+                        <div id="pets-parent-div" class="">
+
+                        </div>
+                </main>
+
+                <!-- Details popup massage section -->
+                <div id="popup-massage"
+                        class="bg-black bg-opacity-20 w-full h-screen hidden mx-0 fixed top-0 flex justify-start items-center left-0 ">
+                        <div id="details"
+                                class="mx-auto max-h-[60rem] overflow-y-auto hide-scrollbar xl:w-[48rem] lg:w-[42rem] md:w-[32rem] w-[23rem] bg-white p-4 md:p-6 lg:p-8 rounded-xl whitespace-normal text-center space-y-2 md:space-y-6">
+                                <button id="close-popup"
+                                        class="bg-[#0E7A811A] text-[#0E7A81] rounded-md shadow py-2 lg:py-4 w-full text-xl lg:text-2xl  font-bold">Cancel</button>
+                        </div>
+                </div>
+
+                <!-- Adopt confirmation massage section  -->
+                <div id="adopt-popup"
+                        class="bg-black bg-opacity-40 w-full h-screen hidden  fixed top-0 flex justify-center items-center left-0">
+                        <div
+                                class="max-w-[32rem] bg-white p-4 md:py-6 md:px-24 rounded-xl whitespace-normal text-center space-y-6 flex flex-col justify-center items-center">
+                                <img src="./images/handshake.png" alt="">
+                                <h3 class="text-2xl font-bold">Congratulation!</h3>
+                                <p class="text-base">Adoption process Starts for your pets.</p>
+                                <p id="second" class="text-5xl font-extrabold pb-4">3</p>
+                        </div>
+                </div>
+        </div>
+
+
+        <!-- footer section start here  -->
+        <footer class="bg-[#131313] text-white py-4 md:py-16">
+                <div
+                        class="w-11/12 2xl:max-w-[1536px] mx-auto flex flex-col md:flex-row gap-2 justify-between pl-8 md:pl-0">
+                        <div class=" space-y-2">
+                                <h1 class="flex text-xl items-center px-1 w-24 font-bold mb-2 gap-2" href=""> <img
+                                                class="h-[2rem]" src="./images/logo.webp" alt="">Paddy</h1>
+                                <ul class=" text-xs text-[#FFFFFF99]">
+                                        <li>Location: av. Washington 165, NY CA 54003</li>
+                                        <li>Phone: +31 85 964 47 25</li>
+                                        <li>Email: info@yourdomain.com</li>
+                                        <li>Openings hours: 9.00 AM - 5.00 PM</li>
+
+                                </ul>
+                                <div class="flex gap-2">
+                                        <img class="h-8" src="./images/icons8-facebook-48.png" alt=""></img>
+                                        <img class="h-8" src="./images/icons8-twitterx-48.png" alt=""></img>
+                                        <img class="h-8" src="./images/icons8-youtube-48.png" alt=""></img>
+                                        <img class="h-8" src="./images/icons8-instagram-48.png" alt=""></img>
+                                </div>
+                        </div>
+                        <div>
+                                <h1 class="text-xl font-bold mb-2">Useful Links</h1>
+                                <ul class=" text-xs space-y-1 text-[#FFFFFF99]">
+                                        <li><a href="">Home</a></li>
+                                        <li><a href="">About Us</a></li>
+                                        <li><a href="">Animals</a></li>
+                                        <li><a href="">Foundation</a></li>
+                                        <li><a href="">Contact</a></li>
+
+                                </ul>
+                        </div>
+                        <div class="space-y-3 w-56">
+                                <h1 class="text-xl font-bold">Drop a Massage</h1>
+                                <input type="text" placeholder="Enter your email"
+                                        class="input input-bordered w-full h-10 bg-gray-800 max-w-xs" />
+                                <button
+                                        class="py-2 px-6 bg-[#0E7A81] w-full text-base text-white font-medium rounded-lg">Subscribe</button>
+                        </div>
+                </div>
+        </footer>
+        <script src="./script/index.js"></script>
+</body>
+
+</html>

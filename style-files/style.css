@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+.lato {
+  font-family: "Lato", sans-serif;
+}
+button:disabled {
+  background-color: #ccc;
+  color: #666;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Navbar section for large device style start here  */
+#mobile-nav {
+  display: block;
+}
+
+#large-display-nav {
+  display: none;
+}
+
+/* Navbar section for mobile device style start here  */
+@media (min-width: 768px) {
+  #mobile-nav {
+    display: none;
+  }
+
+  #large-display-nav {
+    display: block;
+  }
+}
