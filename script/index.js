@@ -149,9 +149,13 @@ const displayCategoryPets = (pets) => {
     }</p>
       <hr>
     <div class="card-actions justify-between pt-2">
-<button onclick="addLikedList(${
+<button id="like-${pet.petId}" onclick="addLikedList(${
       pet.petId
-    })" class="text-base  font-bold px-3 py-2 border-2 solid border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up"></i></button>
+    })" class="text-base text-[#0E7A81] font-semibold px-3 py-2 border-2 solid border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up"></i></button>
+
+<button id="disLike-${pet.petId}" onclick="removeLikedList(${
+      pet.petId
+    })" class="text-base hidden font-semibold px-3 py-2 border-2 solid bg-[#0e79813f] border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up text-[#0E7A81]"></i></button>
 <button id="btn-${pet.petId}" onclick="adoptPet(${
       pet.petId
     })" class="text-base text-[#0E7A81] font-bold px-2 py-2 border-2 solid border-[#0e79813f] rounded-xl">Adopt</button>
@@ -299,9 +303,14 @@ const displayPets = (pets) => {
     }</p>
       <hr>
     <div class="card-actions flex justify-between pt-2">
-<button onclick="addLikedList(${
+<button id="like-${pet.petId}" onclick="addLikedList(${
       pet.petId
-    })" class="text-base  font-semibold px-3 py-2 border-2 solid border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up"></i></button>
+    })" class="text-base text-[#0E7A81] font-semibold px-3 py-2 border-2 solid border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up"></i></button>
+
+<button id="disLike-${pet.petId}" onclick="removeLikedList(${
+      pet.petId
+    })" class="text-base hidden font-semibold px-3 py-2 border-2 solid bg-[#0e79813f] border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up text-[#0E7A81]"></i></button>
+
 <button id="btn-${pet.petId}" onclick="adoptPet(${
       pet.petId
     })" class="text-base text-[#0E7A81] font-semibold px-2 py-2 border-2 solid border-[#0e79813f] rounded-xl">Adopt</button>
@@ -423,9 +432,13 @@ const displayPetsSort = (pets, order) => {
     }</p>
       <hr>
     <div class="card-actions justify-between pt-2">
-<button onclick="addLikedList(${
+<button id="like-${pet.petId}" onclick="addLikedList(${
       pet.petId
-    })" class=" text-base  font-semibold px-3 py-2 border-2 solid border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up"></i></button>
+    })" class="text-base text-[#0E7A81] font-semibold px-3 py-2 border-2 solid border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up"></i></button>
+
+<button id="disLike-${pet.petId}" onclick="removeLikedList(${
+      pet.petId
+    })" class="text-base hidden font-semibold px-3 py-2 border-2 solid bg-[#0e79813f] border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up text-[#0E7A81]"></i></button>
 <button id="btn-${pet.petId}" onclick="adoptPet(${
       pet.petId
     })" class="text-base text-[#0E7A81] font-bold px-2 py-2 border-2 solid border-[#0e79813f] rounded-xl">Adopt</button>
@@ -555,9 +568,13 @@ function displayCategorySort(pets, order) {
     }</p>
       <hr>
     <div class="card-actions justify-between pt-2">
-<button onclick="addLikedList(${
+<button id="like-${pet.petId}" onclick="addLikedList(${
       pet.petId
-    })" class="text-base  font-bold px-3 py-2 border-2 solid border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up"></i></button>
+    })" class="text-base text-[#0E7A81] font-semibold px-3 py-2 border-2 solid border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up"></i></button>
+
+<button id="disLike-${pet.petId}" onclick="removeLikedList(${
+      pet.petId
+    })" class="text-base hidden font-semibold px-3 py-2 border-2 solid bg-[#0e79813f] border-[#0e79813f] rounded-xl"><i class="fa-regular fa-thumbs-up text-[#0E7A81]"></i></button>
 <button id="btn-${pet.petId}" onclick="adoptPet(${
       pet.petId
     })" class="text-base text-[#0E7A81] font-bold px-2 py-2 border-2 solid border-[#0e79813f] rounded-xl">Adopt</button>
@@ -586,6 +603,14 @@ const loading = () => {
 
 // Add liked list photo function
 function addLikedList(id) {
+  const allSamePetPhoto = document.querySelectorAll(`.pet-${id}`);
+  const likeBtn = document.getElementById(`like-${id}`);
+  const disLikeBtn = document.getElementById(`disLike-${id}`);
+  likeBtn.classList.remove("hidden");
+  disLikeBtn.classList.add("hidden");
+  for (const photo of allSamePetPhoto) {
+    photo.classList.add("hidden");
+  }
   fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
     .then((response) => response.json())
     .then((json) => addLikedListDisplay(json));
@@ -608,12 +633,30 @@ function addLikedListDisplay(data) {
     "border-2",
     "solid",
     "h-32",
-    "border-[#1313131A]"
+    "border-[#1313131A]",
+    `pet-${data.petData.petId}`
   );
   newElement.innerHTML = `
-  <img class="h-full w-full object-cover rounded-lg"  src="${data.petData.image}" alt="">
+  <img id="" class="h-full w-full object-cover rounded-lg pet-${data.petData.petId}"  src="${data.petData.image}" alt="">
  `;
   likedPhotosDiv.append(newElement);
+
+  const likeBtn = document.getElementById(`like-${data.petData.petId}`);
+  const disLikeBtn = document.getElementById(`disLike-${data.petData.petId}`);
+  likeBtn.classList.add("hidden");
+  disLikeBtn.classList.remove("hidden");
+}
+
+// remove liked list photo
+function removeLikedList(id) {
+  const allSamePetPhoto = document.querySelectorAll(`.pet-${id}`);
+  const likeBtn = document.getElementById(`like-${id}`);
+  const disLikeBtn = document.getElementById(`disLike-${id}`);
+  likeBtn.classList.remove("hidden");
+  disLikeBtn.classList.add("hidden");
+  for (const photo of allSamePetPhoto) {
+    photo.classList.add("hidden");
+  }
 }
 
 // Adopt confirmation function call
