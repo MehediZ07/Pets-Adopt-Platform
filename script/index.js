@@ -608,12 +608,14 @@ function addLikedList(id) {
   const disLikeBtn = document.getElementById(`disLike-${id}`);
   likeBtn.classList.remove("hidden");
   disLikeBtn.classList.add("hidden");
-  for (const photo of allSamePetPhoto) {
-    photo.classList.add("hidden");
-  }
+  allSamePetPhoto.forEach((element) => {
+    element.remove();
+  });
+
   fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
     .then((response) => response.json())
     .then((json) => addLikedListDisplay(json));
+  errorMassage();
 }
 //  Display liked list photo
 function addLikedListDisplay(data) {
@@ -645,19 +647,32 @@ function addLikedListDisplay(data) {
   const disLikeBtn = document.getElementById(`disLike-${data.petData.petId}`);
   likeBtn.classList.add("hidden");
   disLikeBtn.classList.remove("hidden");
+  errorMassage();
 }
 
 // remove liked list photo
 function removeLikedList(id) {
+  errorMassage();
   const allSamePetPhoto = document.querySelectorAll(`.pet-${id}`);
   const likeBtn = document.getElementById(`like-${id}`);
   const disLikeBtn = document.getElementById(`disLike-${id}`);
   likeBtn.classList.remove("hidden");
   disLikeBtn.classList.add("hidden");
-  for (const photo of allSamePetPhoto) {
-    photo.classList.add("hidden");
-  }
+
+  allSamePetPhoto.forEach((element) => {
+    element.remove();
+  });
 }
+
+const errorMassage = () => {
+  const children = document.getElementById("liked-photos").children.length;
+
+  if (children > 1) {
+    document.getElementById("error-massage").classList.add("hidden");
+  } else {
+    document.getElementById("error-massage").classList.remove("hidden");
+  }
+};
 
 // Adopt confirmation function call
 function adoptPet(id) {
